@@ -232,6 +232,9 @@ searchInput.addEventListener('input', renderCatalog);
 
 document.querySelectorAll('.sidebar').forEach((sidebar) => {
     const toggle = sidebar.querySelector('.sidebar-toggle');
+    const desktopHover = () => window.matchMedia(
+        '(min-width: 768px) and (hover: hover) and (pointer: fine)'
+    ).matches;
 
     function setExpanded(expanded) {
         sidebar.classList.toggle('is-expanded', expanded);
@@ -247,20 +250,24 @@ document.querySelectorAll('.sidebar').forEach((sidebar) => {
     });
 
     sidebar.addEventListener('pointerenter', () => {
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (desktopHover()) {
             setExpanded(true);
         }
     });
 
     sidebar.addEventListener('pointerleave', () => {
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (desktopHover()) {
             setExpanded(false);
         }
     });
 
-    sidebar.addEventListener('focusin', () => setExpanded(true));
+    sidebar.addEventListener('focusin', () => {
+        if (desktopHover()) {
+            setExpanded(true);
+        }
+    });
     sidebar.addEventListener('focusout', (event) => {
-        if (!sidebar.contains(event.relatedTarget) && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (!sidebar.contains(event.relatedTarget) && desktopHover()) {
             setExpanded(false);
         }
     });
