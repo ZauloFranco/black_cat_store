@@ -269,6 +269,7 @@ body {
 
 .sidebar-recommendations {
     grid-area: recommendations;
+    justify-self: end;
 }
 
 .sidebar.is-expanded {
@@ -276,13 +277,8 @@ body {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
 }
 
-.sidebar-social.is-expanded {
-    position: sticky;
-}
-
-.sidebar-recommendations.is-expanded {
-    position: sticky;
-    margin-left: calc(3.75rem - min(15rem, calc(100vw - 2rem)));
+.sidebar-recommendations .sidebar-toggle {
+    margin-left: auto;
 }
 
 .sidebar-toggle {
@@ -623,10 +619,6 @@ body {
         width: min(13rem, calc(100vw - 2rem));
     }
 
-    .sidebar-recommendations.is-expanded {
-        margin-left: calc(2.9rem - min(13rem, calc(100vw - 2rem)));
-    }
-
     .catalog-section {
         padding: 1.1rem 0.85rem;
         border-radius: 1.2rem;
@@ -689,10 +681,6 @@ body {
     .sidebar-toggle {
         width: 2.45rem;
         min-width: 2.45rem;
-    }
-
-    .sidebar-recommendations.is-expanded {
-        margin-left: calc(2.55rem - min(13rem, calc(100vw - 2rem)));
     }
 
     .catalog-section {
