@@ -1,5 +1,6 @@
 const API_URL = 'https://fakestoreapi.com';
 
+// Referencias a los contenedores y controles definidos en index.html.
 const productGrid = document.querySelector('#productGrid');
 const featuredGrid = document.querySelector('#featuredGrid');
 const recommendationList = document.querySelector('#recommendationList');
@@ -12,6 +13,9 @@ const productModalBody = document.querySelector('#productModalBody');
 
 let products = [];
 
+// Crea elementos de forma segura usando textContent para el texto visible.
+// La usan createProductCard, renderCatalog, renderRecommendations, showCatalogError,
+// loadProducts, renderProductDetails y openProductDetails.
 function createElement(tag, className, text) {
     const element = document.createElement(tag);
     if (className) element.className = className;
@@ -19,6 +23,9 @@ function createElement(tag, className, text) {
     return element;
 }
 
+// Construye una tarjeta reutilizable para el catálogo o los destacados.
+// La llaman renderCatalog y renderFeatured; sus botones abren openProductDetails
+// mediante el listener delegado de clics del documento.
 function createProductCard(product, compact = false) {
     const button = createElement(
         'button',
@@ -48,6 +55,9 @@ function createProductCard(product, compact = false) {
     return button;
 }
 
+// Filtra y dibuja los productos según el campo de búsqueda.
+// Se ejecuta al cargar productos desde loadProducts y al escribir en productSearch.
+// Cada tarjeta creada usa createProductCard.
 function renderCatalog() {
     const query = searchInput.value.trim().toLocaleLowerCase();
     const visibleProducts = products.filter((product) =>
@@ -67,6 +77,9 @@ function renderCatalog() {
     productGrid.append(fragment);
 }
 
+// Dibuja los cuatro productos con mejor puntuación.
+// La llama loadProducts después de recibir el catálogo; createProductCard genera
+// las tarjetas compactas que abren los mismos detalles que las del catálogo.
 function renderFeatured() {
     featuredGrid.replaceChildren();
     const featuredProducts = [...products]
@@ -78,6 +91,9 @@ function renderFeatured() {
     featuredGrid.append(fragment);
 }
 
+// Dibuja en la barra lateral los cuatro productos mejor valorados.
+// La llama loadProducts; sus botones comparten el listener delegado que llama
+// openProductDetails, igual que las tarjetas del catálogo y los destacados.
 function renderRecommendations() {
     recommendationList.replaceChildren();
     const recommendedProducts = [...products]
@@ -108,6 +124,9 @@ function renderRecommendations() {
     recommendationList.append(fragment);
 }
 
+// Muestra el estado de error y permite volver a solicitar el catálogo.
+// La llama loadProducts si falla la API o la validación; el botón de reintento
+// vuelve a ejecutar loadProducts.
 function showCatalogError() {
     productGrid.replaceChildren();
     featuredGrid.replaceChildren();
@@ -124,6 +143,10 @@ function showCatalogError() {
     productGrid.append(retryButton);
 }
 
+// Consulta Get all products, valida la respuesta y actualiza las tres vistas.
+// Se ejecuta al iniciar el archivo y también al pulsar Reintentar.
+// En éxito llama renderCatalog, renderFeatured y renderRecommendations;
+// en error llama showCatalogError.
 async function loadProducts() {
     productGrid.replaceChildren(createElement('p', 'catalog-status', 'Cargando productos...'));
     featuredGrid.replaceChildren(createElement('p', 'catalog-status', 'Preparando recomendaciones...'));
@@ -162,6 +185,8 @@ async function loadProducts() {
     }
 }
 
+// Inserta en el modal los datos completos de un producto.
+// La llama openProductDetails después de consultar Get a single product.
 function renderProductDetails(product) {
     productModalTitle.textContent = product.title;
     productModalBody.replaceChildren();
@@ -196,6 +221,10 @@ function renderProductDetails(product) {
     productModalBody.append(layout);
 }
 
+// Consulta Get a single product y presenta el modal con sus datos o un error.
+// La invoca el listener delegado de clics en los botones con data-product-id,
+// creados por createProductCard y renderRecommendations; al tener éxito llama
+// renderProductDetails.
 async function openProductDetails(productId) {
     productModalTitle.textContent = 'Detalles del producto';
     productModalBody.replaceChildren(createElement('p', 'modal-description', 'Cargando producto...'));
@@ -221,6 +250,9 @@ async function openProductDetails(productId) {
     }
 }
 
+// Delegación de clics: cualquier tarjeta con data-product-id abre sus detalles.
+// Conecta las tarjetas creadas por createProductCard y renderRecommendations
+// con openProductDetails sin registrar un listener por cada producto.
 document.addEventListener('click', (event) => {
     const productButton = event.target.closest('[data-product-id]');
     if (productButton) {
@@ -228,14 +260,21 @@ document.addEventListener('click', (event) => {
     }
 });
 
+// Mantiene sincronizado el catálogo con el texto introducido en la búsqueda.
+// Cada cambio vuelve a ejecutar renderCatalog.
 searchInput.addEventListener('input', renderCatalog);
 
+// Inicializa las dos barras laterales con el botón, hover y foco de escritorio.
+// Los elementos .sidebar y .sidebar-toggle están definidos en index.html;
+// setExpanded controla la clase .is-expanded estilizada en index.css.
 document.querySelectorAll('.sidebar').forEach((sidebar) => {
     const toggle = sidebar.querySelector('.sidebar-toggle');
     const desktopHover = () => window.matchMedia(
         '(min-width: 768px) and (hover: hover) and (pointer: fine)'
     ).matches;
 
+    // Sincroniza el estado visual y accesible de una barra lateral.
+    // La usan los listeners de clic, pointerenter, pointerleave, focusin y focusout.
     function setExpanded(expanded) {
         sidebar.classList.toggle('is-expanded', expanded);
         toggle.setAttribute('aria-expanded', String(expanded));
@@ -273,4 +312,5 @@ document.querySelectorAll('.sidebar').forEach((sidebar) => {
     });
 });
 
+// Primera carga del catálogo; loadProducts prepara también los destacados y la barra.
 loadProducts();

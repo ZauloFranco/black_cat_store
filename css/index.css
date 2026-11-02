@@ -1,3 +1,4 @@
+/* Barra superior y búsqueda; las rutas de navegación apuntan a las secciones de index.html. */
 .black-cat-header {
     position: sticky;
     top: 0;
@@ -59,6 +60,7 @@
     }
 }
 
+/* Pie de página, enlaces sociales y formularios informativos. */
 .black-cat-footer {
     color: rgba(255, 255, 255, 0.78);
     background: linear-gradient(135deg, #09090f 0%, #171322 55%, #251b35 100%);
@@ -176,6 +178,7 @@
     color: #d7c5ff;
 }
 
+/* Apariencia común para los modales de contacto, información y producto. */
 .black-cat-modal .modal-content {
     color: #f8f6ff;
     background: linear-gradient(145deg, #171322, #251b35);
@@ -222,6 +225,7 @@
     --cat-muted: rgba(255, 255, 255, 0.64);
 }
 
+/* Base visual y desplazamiento hasta secciones bajo el encabezado fijo. */
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
@@ -247,6 +251,8 @@ body {
     padding: 2.5rem 0 4rem;
 }
 
+/* Estilo compartido por section_1 y section_3. index.js alterna .is-expanded
+   desde los botones o con hover/foco en escritorio; la transición anima el ancho. */
 .sidebar {
     position: sticky;
     top: 6rem;
@@ -272,6 +278,7 @@ body {
     justify-self: end;
 }
 
+/* La barra derecha se alinea al borde de su columna para expandirse hacia el centro. */
 .sidebar.is-expanded {
     width: min(15rem, calc(100vw - 2rem));
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
@@ -339,6 +346,7 @@ body {
     color: #fff;
 }
 
+/* Contenedores y encabezados de section_2 (catálogo) y section_4 (destacados). */
 .catalog-section {
     grid-area: catalog;
     min-width: 0;
@@ -407,6 +415,8 @@ body {
     gap: 1rem;
 }
 
+/* Tarjetas generadas por createProductCard en index.js, tanto en el catálogo
+   como en la selección de mejor puntuación. */
 .product-card {
     display: flex;
     min-width: 0;
@@ -496,6 +506,8 @@ body {
     gap: 0.75rem;
 }
 
+/* Miniaturas de section_3; sus botones usan data-product-id para abrir el modal
+   mediante el listener delegado de index.js. */
 .recommendation-item {
     display: flex;
     width: 100%;
@@ -550,6 +562,7 @@ body {
     font-size: 0.86rem;
 }
 
+/* Distribución de imagen y datos que renderProductDetails inserta en el modal. */
 .product-detail {
     display: grid;
     grid-template-columns: minmax(10rem, 0.8fr) minmax(0, 1.2fr);
@@ -587,6 +600,7 @@ body {
 }
 
 @media (max-width: 767.98px) {
+    /* Reduce columnas y controles laterales para pantallas táctiles pequeñas. */
     .store-layout {
         grid-template-columns: 2.9rem minmax(0, 1fr) 2.9rem;
         grid-template-areas:
@@ -669,6 +683,7 @@ body {
 }
 
 @media (max-width: 420px) {
+    /* Ajustes adicionales para teléfonos estrechos. */
     .store-layout {
         grid-template-columns: 2.55rem minmax(0, 1fr) 2.55rem;
         gap: 1rem 0.35rem;
@@ -694,6 +709,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    /* Respeta la preferencia del usuario y minimiza las transiciones animadas. */
     *,
     *::before,
     *::after {
