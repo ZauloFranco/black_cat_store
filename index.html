@@ -9,7 +9,7 @@
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-    <header class="black-cat-header">
+    <header class="black-cat-header" id="top">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center gap-2" href="#section_1">
@@ -76,9 +76,106 @@
 
         </Main>
     
-    <footer>
+    <footer class="black-cat-footer">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-12 col-lg-5">
+                    <a class="footer-brand" href="#top">
+                        <i class="bi bi-cat-fill" aria-hidden="true"></i>
+                        <span>Black Cat</span>
+                    </a>
+                    <p class="footer-description">Un espacio para descubrir y explorar nuestros productos.</p>
+                </div>
 
+                <div class="col-6 col-lg-3">
+                    <h2 class="footer-heading">Explora</h2>
+                    <ul class="footer-links">
+                        <li><a href="#top"><i class="bi bi-house-door-fill" aria-hidden="true"></i> Inicio</a></li>
+                        <li>
+                            <button class="footer-link-button" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                <i class="bi bi-envelope-fill" aria-hidden="true"></i> Contactanos
+                            </button>
+                        </li>
+                        <li>
+                            <button class="footer-link-button" type="button" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                                <i class="bi bi-info-circle-fill" aria-hidden="true"></i> Acerca de
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-4">
+                    <h2 class="footer-heading">Redes sociales</h2>
+                    <div class="footer-social-links">
+                        <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a class="social-link" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                            <i class="bi bi-tiktok" aria-hidden="true"></i>
+                        </a>
+                        <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                            <i class="bi bi-youtube" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; Black Cat</span>
+                <a href="#top">Volver al inicio <i class="bi bi-arrow-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
     </footer>
+
+    <div class="modal fade black-cat-modal" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="contactModalLabel">Contactanos</h2>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">Completa tus datos y cuéntanos cómo podemos ayudarte.</p>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label" for="contactName">Nombre</label>
+                            <input class="form-control" id="contactName" name="name" type="text" autocomplete="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="contactPhone">Teléfono</label>
+                            <input class="form-control" id="contactPhone" name="phone" type="tel" autocomplete="tel" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="contactEmail">Correo electrónico</label>
+                            <input class="form-control" id="contactEmail" name="email" type="email" autocomplete="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="contactMessage">Mensaje</label>
+                            <textarea class="form-control" id="contactMessage" name="message" rows="4" required></textarea>
+                        </div>
+                        <button class="btn btn-outline-light" type="button" disabled>Envío no configurado</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade black-cat-modal" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="aboutModalLabel">Acerca de Black Cat</h2>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Black Cat es una tienda en línea dedicada a presentar productos y ofrecer un espacio sencillo para descubrirlos. Nuestro objetivo es brindar una experiencia clara y agradable para explorar el catálogo de la tienda.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
